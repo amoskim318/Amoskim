@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADB Boot Dump Guide</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1,
+    h2 {
+      color: #2c3e50;
+    }
+
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 8px;
+      position: relative;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #2980b9;
+    }
+
+    .copied {
+      background: #27ae60 !important;
+    }
+
+    nav a,
+    nav button a {
+      text-decoration: none;
+      color: #3498db;
+    }
+
+    nav button {
+      background: #ecf0f1;
+      border: 1px solid #bdc3c7;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>ADB Device</h1>
+  </header>
+
+  <main>
+    <h2>Example Commands</h2>
+    <pre><code>cd C:\platform-tools</code><button class="copy-btn">Copy</button></pre>
+
+    <pre><code>adb devices</code><button class="copy-btn">Copy</button></pre>
+
+    <pre><code>adb shell su -c "dd if=/dev/block/by-name/boot_a of=/sdcard/boot.img"</code>
+      <button class="copy-btn">Copy</button></pre>
+
+    <pre><code>adb pull /sdcard/boot.img C:\boot.img</code><button class="copy-btn">Copy</button></pre>
+
+    <nav>
+      <p><a href="shortcut.html">Shortcut</a></p>
+      <button type="button"><a href="/image.html">Image</a></button>
+    </nav>
+  </main>
+
+  <script>
+    // Copy-to-clipboard functionality
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.previousElementSibling.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 1500);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
