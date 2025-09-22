@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pull boot.img - Realme Note 50 (Android 15)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background: #f9f9f9; color: #333; }
+    h1 { color: #0066cc; }
+    pre { background: #eee; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    button { background: #0066cc; color: #fff; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 10px; }
+    button:hover { background: #004c99; }
+    section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Procedure: Pulling boot.img from Realme Note 50 (Android 15)</h1>
+  <section>
+    <h2>Important Warnings</h2>
+    <ul>
+      <li>Unlocking or modifying partitions may void your warranty or trigger SafetyNet.</li>
+      <li>Extracting or flashing the wrong boot.img can brick your phone—proceed with caution.</li>
+      <li>Back up your data first.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Requirements</h2>
+    <ol>
+      <li>Computer with ADB & Fastboot installed: <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">Download here</a>.</li>
+      <li>Enable Developer Options and USB Debugging on your phone.</li>
+      <li>Use the original or a high-quality USB cable.</li>
+    </ol>
+  </section>
+  <section>
+    <h2>Steps to Pull boot.img</h2>
+    <button onclick="copySteps()">Copy Commands</button>
+    <pre id="steps">
+1. adb devices
+2. adb reboot bootloader
+3. fastboot devices
+4. fastboot getvar all
+5. fastboot fetch boot boot.imgIf fetch not supported:
+
+adb shell su dd if=/dev/block/bootdevice/by-name/boot of=/sdcard/boot.img exit adb pull /sdcard/boot.img
+
+6. file boot.img </pre>
+
+
+
+  </section>
+  <section>
+    <h2>Alternative</h2>
+    <p>If blocked, download official Realme firmware for your exact build and extract boot.img using payload-dumper-go or MTKclient.</p>
+  </section>
+  <script>
+    function copySteps() {
+      const steps = document.getElementById('steps').innerText;
+      navigator.clipboard.writeText(steps).then(() => {
+        alert('Commands copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
